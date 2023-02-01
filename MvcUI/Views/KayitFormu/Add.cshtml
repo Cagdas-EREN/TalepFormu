@@ -1,0 +1,530 @@
+﻿@model Entities.Concrete.KisiselBilgiler
+@{
+    ViewData["Title"] = "Başvuru Formu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Başvuru Formu</h1>
+
+@{
+    ViewData["Title"] = "Kayıt Ekranı";
+}
+
+<link href="~/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<link href="~/inspinia-gh-pages/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/cropper/cropper.min.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/switchery/switchery.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/select2/select2.min.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/plugins/dualListbox/bootstrap-duallistbox.min.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/animate.css" rel="stylesheet">
+<link href="~/inspinia-gh-pages/css/style.css" rel="stylesheet">
+
+
+
+@using (Html.BeginForm("Add", "KayitFormu", FormMethod.Post))
+{
+    <form>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Abonelik Başvurusu</h5>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <p>
+                                        Abonelik Başvuru Türü
+                                    </p>
+                                    <div class="col-md-6">
+                                        @*@Html.DropDownList("DrpTurlar", (List<SelectListItem>)ViewBag.AbonelikTuru, "---Abonelik Seçiniz---", new {@class="form-control"})*@
+                                        @Html.DropDownListFor(x => x.AboneTurId, (List<SelectListItem>)ViewBag.AbonelikTuru, "---Abonelik Seçiniz---", new {@class="form-control", @id="DrpTurlar"})
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <p>
+                                        Meslek Kodu
+                                    </p>
+                                    <div class="col-md-6">
+                                       @* @Html.DropDownList("DrpMeslek", (List<SelectListItem>)ViewBag.MeslekKodu, "---Meslek Kodu Seçiniz---", new {@class="form-control"})*@
+                                        @Html.DropDownListFor(x => x.MeslekId, (List<SelectListItem>)ViewBag.MeslekKodu, "---Meslek Kodu Seçiniz---",new {@class="form-control", @id="DrpMeslek"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox bilgiler">
+                        <div class="ibox-title">
+                            <h5>Yetkili Bilgileri</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Ad *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="Ad" type="text" placeholder="adınız" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Soyad *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="Soyad" type="text" placeholder="soyadınız" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Doğum Tarihi *</label>
+                                        <div class="input-group date">
+                                            <input type="date" name="DogumTarihi" class="form-control" placeholder="doğum tarihiniz" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Baba Adı *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="BabaAdi" type="text" placeholder="baba adı" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Anne Adı *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="AnneAdi" type="text" placeholder="anne adı" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">TCKN / YKN *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="TcNo" type="text" maxlength="11" placeholder="TC kimlik No" required/>
+                                             @TempData["hata"]                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Kimlik Seri No *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="KimlikSeriNo" type="text" placeholder="kimlik seri no" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Telefon *</label>
+                                        <div class="input-group">
+                                            <input type="tel" name="Telefon" class="form-control" data-mask="(999) 999-9999" placeholder="telefon numarası" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">E-Posta Adresi *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="Mail" type="email" placeholder="e-posta"  required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Güvenlik Kelimesi *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="GüvenlikKelimesi" type="text" placeholder="güvenlik kelimesi" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Adres Bilgileri</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @Html.Label("İl")
+                                    @*@Html.DropDownList("DrpSehir", (List<SelectListItem>)ViewBag.Il,  "---Şehir Seçin---",  new {@class="form-control"})*@
+                                    @Html.DropDownListFor(x => x.IlId, (List<SelectListItem>)ViewBag.Il,  "Şehir Seçiniz",  new {@class="form-control", @id="DrpSehir"})
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.Label("İlçe",null, new{@class="lblilce"})
+                                    <br />
+                                    <select id="Drpilce" name="IlceId" class="form-control">
+                                        <option value="">İlçe Seçiniz</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.Label("Mahalle",null, new{@class="lblmahalle"})
+                                    <br />
+                                    <select id="DrpMahalleler" name="MahalleId" class="form-control">
+                                        <option value="" selected>Mahalle Seçiniz</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.Label("Sokak - Cadde",null, new{@class="lblcadde"})
+                                    <br />
+                                    <select id="DrpSokaklar" name="CaddeId" class="form-control">
+                                        <option value="" selected>Sokak Seçiniz</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Dış Kapı No *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="DisKapiNo" type="text" placeholder="dış kapı no" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">İç Kapı No *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="icKapiNo" type="text" placeholder="iç kapı no" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="sirket">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Şirket Bilgileri</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Vergi Dairesi *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="VergiDairesi" type="text" placeholder="vergi dairesi" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-normal">Vergi Numarası *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="VergiNo" type="text" placeholder="vergi numarası" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-normal">Şirket Ünvanı *</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="FirmaAdi" type="text" placeholder="firma adı"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Numara Tercihi</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="col-md-6">
+                                        @Html.Label("Numaralar")
+                                       @* @Html.DropDownList("DrpNumara", (List<SelectListItem>)ViewBag.Numaralar, "---Numara Seçiniz---", new {@class="form-control"})*@
+                                        @Html.DropDownListFor(x => x.NumaraId, (List<SelectListItem>)ViewBag.Numaralar, "Numara Seçiniz", new {@class="form-control", @id="DrpNumara"})
+                                    </div>
+                                    <hr>
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <button class="btn btn-primary btn-sm" type="submit">Gönder</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+
+
+@section scripts{
+
+    <script src="~/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
+    <script src="~/inspinia-gh-pages/js/popper.min.js"></script>
+    <script src="~/inspinia-gh-pages/js/bootstrap.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="~/inspinia-gh-pages/js/inspinia.js"></script>
+    <script src="~/inspinia-gh-pages/js/plugins/pace/pace.min.js"></script>
+    <script src="~/inspinia-gh-pages/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Chosen -->
+    <script src="~/inspinia-gh-pages/js/plugins/chosen/chosen.jquery.js"></script>
+
+    <!-- JSKnob -->
+    <script src="~/inspinia-gh-pages/js/plugins/jsKnob/jquery.knob.js"></script>
+
+    <!-- Input Mask-->
+    <script src="~/inspinia-gh-pages/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+    <!-- Data picker -->
+    <script src="~/inspinia-gh-pages/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    <!-- NouSlider -->
+    <script src="~/inspinia-gh-pages/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+    <!-- Switchery -->
+    <script src="~/inspinia-gh-pages/js/plugins/switchery/switchery.js"></script>
+
+    <!-- IonRangeSlider -->
+    <script src="~/inspinia-gh-pages/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="~/inspinia-gh-pages/js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- MENU -->
+    <script src="~/inspinia-gh-pages/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- Color picker -->
+    <script src="~/inspinia-gh-pages/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+    <!-- Clock picker -->
+    <script src="~/inspinia-gh-pages/js/plugins/clockpicker/clockpicker.js"></script>
+
+    <!-- Image cropper -->
+    <script src="~/inspinia-gh-pages/js/plugins/cropper/cropper.min.js"></script>
+
+    <!-- Date range use moment.js same as full calendar plugin -->
+    <script src="~/inspinia-gh-pages/js/plugins/fullcalendar/moment.min.js"></script>
+
+    <!-- Date range picker -->
+    <script src="~/inspinia-gh-pages/js/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Select2 -->
+    <script src="~/inspinia-gh-pages/js/plugins/select2/select2.full.min.js"></script>
+
+    <!-- TouchSpin -->
+    <script src="~/inspinia-gh-pages/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+    <!-- Tags Input -->
+    <script src="~/inspinia-gh-pages/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+
+    <!-- Dual Listbox -->
+    <script src="~/inspinia-gh-pages/js/plugins/dualListbox/jquery.bootstrap-duallistbox.js"></script>
+
+
+
+    <script>
+
+        $(function () {
+
+            $('#Drpilce').hide();
+            $('.lblilce').hide();
+            $('.lblmahalle').hide();
+            $('#DrpSehir').change(function () {
+
+                var id = $('#DrpSehir').val();
+
+                $.ajax({
+
+                    url: '/kayitformu/ilcegetir',
+
+                    data: { p: id },
+
+                    type: "POST",
+
+                    dataType: "Json",
+
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $('#Drpilce').empty();
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            $('#Drpilce').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+
+                        $('#Drpilce').show();
+                        $('.lblilce').show();
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+    <script>
+
+        $(function () {
+
+            $('#Drpilce').hide();
+            $('.lblilce').hide();
+            $('#DrpMahalleler').hide();
+            $('.lblmahalle').hide();
+            $('#Drpilce').change(function () {
+
+                var id = $('#Drpilce').val();
+
+                $.ajax({
+
+                    url: '/kayitformu/mahallegetir',
+
+                    data: { p: id },
+
+                    type: "POST",
+
+                    dataType: "Json",
+
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $('#DrpMahalleler').empty();
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            $('#DrpMahalleler').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+
+                        $('#Drpilce').show();
+                        $('.lblilce').show();
+                        $('#DrpMahalleler').show();
+                        $('.lblmahalle').show();
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+    <script>
+
+        $(function () {
+            $('#sirket').hide();
+            $('#Drpilce').hide();
+            $('.lblilce').hide();
+            $('#DrpMahalleler').hide();
+            $('.lblmahalle').hide();
+            $('.lblcadde').hide();
+            $('#DrpSokaklar').hide();
+            $('#DrpMahalleler').change(function () {
+
+                var id = $('#DrpMahalleler').val();
+
+                $.ajax({
+
+                    url: '/kayitformu/caddegetir',
+
+                    data: { p: id },
+
+                    type: "POST",
+
+                    dataType: "Json",
+
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $('#DrpSokaklar').empty();
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            $('#DrpSokaklar').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+
+                        $('#Drpilce').show();
+                        $('.lblilce').show();
+                        $('#DrpMahalleler').show();
+                        $('.lblmahalle').show();
+                        $('#DrpSokaklar').show();
+                        $('.lblcadde').show();
+                    }
+
+                });
+
+            });
+
+        });
+
+
+        $("#DrpTurlar").on('change', function () {
+            let val = $(this).find(":selected").val();
+            switch (val) {
+                case "1":
+                    $('#sirket').hide();
+                    break;
+                default:
+                    $('#sirket').show();
+                    break;
+            }
+
+
+        })
+
+    </script>
+
+}
+
