@@ -13,6 +13,6 @@ namespace Entities.Concrete
         public int AboneTurId { get; set; }
         public string AboneTuru { get; set; }
 
-        //public List<KisiselBilgiler> KisiselBilgilers { get; set; }
+        //public List<KisiselBilgiler> KisiselBilgilers { get; set; } 
     }
 }

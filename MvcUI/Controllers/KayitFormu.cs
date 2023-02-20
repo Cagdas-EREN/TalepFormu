@@ -101,25 +101,26 @@ namespace MvcUI.Controllers
         [HttpPost]
         public IActionResult Add(KisiselBilgiler kisiselBilgiler)
         {
-            
+            isPost = true;
+            dogrulamaSonucu = TCKimlikKontrol.TcKimlikNoSorgula(kisiselBilgiler).GetAwaiter().GetResult();
 
-            var tcNo = kisiselBilgiler.TCNO;
-
-            tcNo = TCKimlikKontrol.Kontrol(tcNo);
-
-
-            if (kisiselBilgiler.TCNO != tcNo)
-            {
-                TempData["hata"] = "girmiş olduğunuz bilgiler hatalıdır.";
-            }
-            else
+            if (dogrulamaSonucu == true)
             {
                 kisisel.KisiselBilgilerAdd(kisiselBilgiler);
                 return RedirectToAction("Index", "Home");
-
             }
-            return View();
+            else
+            {
+                ViewBag.Mesaj = "Tc Kimlik Numarası Hatalı";
+            }
+
+            return RedirectToAction("Add", "KayitFormu");
+
+
         }
+
+
+
 
         public JsonResult ilcegetir(int p)
         {

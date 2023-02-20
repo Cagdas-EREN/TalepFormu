@@ -1,9 +1,12 @@
 using Microsoft.Build.Framework;
+using MvcUI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+builder.Services.AddSingleton <TCKimlikKontrol>();
 
 
 // Add services to the container.
