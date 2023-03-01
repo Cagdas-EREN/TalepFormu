@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "OnaySayfası";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Onay"] != null)
+{
+
+    <script charset="utf-8" type="text/javascript">
+        window.onload = function () {
+            alert("@TempData["Onay"]");
+        }
+    </script>
+}
+

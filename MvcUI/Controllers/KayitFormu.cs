@@ -107,14 +107,16 @@ namespace MvcUI.Controllers
             if (dogrulamaSonucu == true)
             {
                 kisisel.KisiselBilgilerAdd(kisiselBilgiler);
-                return RedirectToAction("Index", "Home");
+                TempData["Success"] = "Başvurunuz Alınmıştır";
+                return RedirectToAction();
+
             }
             else
             {
-                ViewBag.Mesaj = "Tc Kimlik Numarası Hatalı";
+                TempData["Message"] = "Girmiş Olduğunuz Kimlik Bilgileri Hatalıdır";
             }
 
-            return RedirectToAction("Add", "KayitFormu");
+            return RedirectToAction();
 
 
         }

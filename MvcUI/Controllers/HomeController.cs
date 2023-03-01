@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MvcUI.Models;
 using System.Diagnostics;
+using System.Web.Helpers;
 
 namespace MvcUI.Controllers
 {
@@ -33,5 +34,12 @@ namespace MvcUI.Controllers
         {
             return PartialView();
         }
+
+        public IActionResult OnaySayfası()
+        {
+            TempData["Onay"] = "Girmiş Olduğunuz Kimlik Bilgileri Hatalıdır";
+            return View();
+        }
+
     }
 }

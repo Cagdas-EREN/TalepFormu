@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h1>Başvuru Formu</h1>
 
 @{
@@ -46,7 +47,19 @@
                             <h5>Abonelik Başvurusu</h5>
                         </div>
                         <div class="ibox-content">
+                            @if (TempData["Message"] != null)
+                            {
+                                <div class="alert alert-danger col-md-12">
+                                    <strong>Hata !...</strong>  @TempData["Message"]
+                                </div>
 
+                            }
+                            @if (TempData["Success"] != null)
+                            {
+                                <div class="alert alert-danger col-md-12">
+                                    <strong>Başarılı </strong>  @TempData["Success"]
+                                </div>
+                            }
                             <div class="row">
 
                                 <div class="col-md-6">
@@ -54,18 +67,16 @@
                                         Abonelik Başvuru Türü
                                     </p>
                                     <div class="col-md-6">
-                                        @*@Html.DropDownList("DrpTurlar", (List<SelectListItem>)ViewBag.AbonelikTuru, "---Abonelik Seçiniz---", new {@class="form-control"})*@
                                         @Html.DropDownListFor(x => x.AboneTurId, (List<SelectListItem>)ViewBag.AbonelikTuru, "---Abonelik Seçiniz---", new {@class="form-control", @id="DrpTurlar"})
                                     </div>
 
                                 </div>
 
                                 <div class="col-md-6">
-                                    <p> 
+                                    <p>
                                         Meslek Kodu
                                     </p>
                                     <div class="col-md-6">
-                                       @* @Html.DropDownList("DrpMeslek", (List<SelectListItem>)ViewBag.MeslekKodu, "---Meslek Kodu Seçiniz---", new {@class="form-control"})*@
                                         @Html.DropDownListFor(x => x.MeslekId, (List<SelectListItem>)ViewBag.MeslekKodu, "---Meslek Kodu Seçiniz---",new {@class="form-control", @id="DrpMeslek"})
                                     </div>
                                 </div>
@@ -98,6 +109,7 @@
                                         <label class="font-normal">Soyad *</label>
                                         <div class="input-group">
                                             <input class="form-control" name="Soyad" type="text" placeholder="soyadınız" required />
+                                            <span asp-validation-for="Soyad"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +125,7 @@
                                     <div class="form-group">
                                         <label class="font-normal">Baba Adı *</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="BabaAdi" type="text" placeholder="baba adı" required/>
+                                            <input class="form-control" name="BabaAdi" type="text" placeholder="baba adı" required />
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +135,7 @@
                                     <div class="form-group">
                                         <label class="font-normal">Anne Adı *</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="AnneAdi" type="text" placeholder="anne adı" required/>
+                                            <input class="form-control" name="AnneAdi" type="text" placeholder="anne adı" required />
                                         </div>
                                     </div>
                                 </div>
@@ -131,8 +143,8 @@
                                     <div class="form-group">
                                         <label class="font-normal">TCKN / YKN *</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="TcNo" type="text" maxlength="11" placeholder="TC kimlik No" required/>
-                                             @TempData["hata"]                                          
+                                            <input class="form-control" name="TcNo" type="text" maxlength="11" placeholder="TC kimlik No" required />
+
                                         </div>
                                     </div>
                                 </div>
@@ -140,9 +152,7 @@
                                     <div class="form-group">
                                         <label class="font-normal">Kimlik Seri No *</label>
                                         <div class="input-group">
-                                            @Html.ValidationSummary(true, "", new{@class = "text-danger"})
                                             <input class="form-control" name="KimlikSeriNo" type="text" placeholder="kimlik seri no" />
-                                            <p style="color:green;">@ViewBag.Mesaj</p>
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +170,7 @@
                                     <div class="form-group">
                                         <label class="font-normal">E-Posta Adresi *</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="Mail" type="email" placeholder="e-posta"  required/>
+                                            <input class="form-control" name="Mail" type="email" placeholder="e-posta" required />
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +198,6 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     @Html.Label("İl")
-                                    @*@Html.DropDownList("DrpSehir", (List<SelectListItem>)ViewBag.Il,  "---Şehir Seçin---",  new {@class="form-control"})*@
                                     @Html.DropDownListFor(x => x.IlId, (List<SelectListItem>)ViewBag.Il,  "Şehir Seçiniz",  new {@class="form-control", @id="DrpSehir"})
                                 </div>
                                 <div class="col-md-3">
@@ -266,7 +275,7 @@
                                     <div class="form-group">
                                         <label class="font-normal">Şirket Ünvanı *</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="FirmaAdi" type="text" placeholder="firma adı"/>
+                                            <input class="form-control" name="FirmaAdi" type="text" placeholder="firma adı" />
                                         </div>
                                     </div>
                                 </div>
@@ -287,13 +296,13 @@
                                 <div class="col-md-4">
                                     <div class="col-md-6">
                                         @Html.Label("Numaralar")
-                                       @* @Html.DropDownList("DrpNumara", (List<SelectListItem>)ViewBag.Numaralar, "---Numara Seçiniz---", new {@class="form-control"})*@
                                         @Html.DropDownListFor(x => x.NumaraId, (List<SelectListItem>)ViewBag.Numaralar, "Numara Seçiniz", new {@class="form-control", @id="DrpNumara"})
                                     </div>
                                     <hr>
-                                    <div class="col-sm-4 col-sm-offset-2">
-                                        <button class="btn btn-primary btn-sm" type="submit">Gönder</button>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary btn-group-lg" style="width:330px" id="kaydet" onclick="fun();" type="submit">Gönder</button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -303,7 +312,6 @@
         </div>
     </form>
 }
-
 
 
 @section scripts{
@@ -370,6 +378,7 @@
 
     <!-- Dual Listbox -->
     <script src="~/inspinia-gh-pages/js/plugins/dualListbox/jquery.bootstrap-duallistbox.js"></script>
+
 
 
 
@@ -527,6 +536,8 @@
         })
 
     </script>
+
+
 
 }
 

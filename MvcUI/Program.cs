@@ -1,4 +1,7 @@
+using DataAccess.Concrete.Context;
+using Entities.Concrete;
 using Microsoft.Build.Framework;
+using Microsoft.Extensions.DependencyInjection;
 using MvcUI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddSingleton <TCKimlikKontrol>();
+builder.Services.AddDbContext<BasvuruContext>();
+builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<BasvuruContext>();
 
 
 // Add services to the container.
@@ -33,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=KayitFormu}/{action=Add}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();
